@@ -1,12 +1,15 @@
 apply plugin: 'com.android.application'
 
+boolean useRemote = use_remote_deps
+
 android {
-    compileSdkVersion 26
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.bigkoo.pickerviewdemo"
-        minSdkVersion 14
-        targetSdkVersion 26
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
     }
@@ -24,9 +27,14 @@ android {
 
 dependencies {
 //    compile fileTree(dir: 'libs', include: ['*.jar'])
-    implementation project(':pickerview')
+    implementation "androidx.appcompat:appcompat:${rootProject.ext.androidX}"
+    if (useRemote) {
+        implementation "com.xxc.dev:pickerview:4.1.9"
+    } else {
+        implementation project(':pickerview')
+    }
+    implementation "com.xxc.dev:wheelview:4.1.0"
 //   implementation 'com.contrarywind:Android-PickerView:4.1.9'
 //    implementation 'com.contrarywind:wheelview:4.1.0'
-    implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.google.code.gson:gson:2.7'
 }

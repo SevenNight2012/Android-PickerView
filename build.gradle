@@ -1,28 +1,54 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
+ext {
+    //是否使用远程依赖
+    use_remote_deps = true
+
+    buildToolsVersion = "28.0.3"
+    compileSdkVersion = 28
+    minSdkVersion = 14
+    targetSdkVersion = 28
+    supportVersion = "28.0.0"
+    androidX = "1.1.0"
+}
+
 buildscript {
     repositories {
-        maven {
-            url 'https://maven.google.com/'
-            name 'Google'
-        }
+        google()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.5.1'
+        classpath 'com.android.tools.build:gradle:4.0.0'
 //        classpath "com.novoda:bintray-release:0.9.1"
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
+//        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
 }
 
 allprojects {
+    Properties properties = new Properties()
+    properties.load(rootProject.file("local.properties").newDataInputStream())
+    def repoUrl=properties.getProperty("repoUrl")
+    def codingUsername = System.getenv("CODING_ACCOUNT")
+    def codingPassword = System.getenv("CODING_PASSWORD")
     repositories {
+        google()
         jcenter()
         maven {
-            url 'https://maven.google.com/'
-            name 'Google'
+            url "${repoUrl}"
+            credentials {
+                username = "${codingUsername}"
+                password = "${codingPassword}"
+            }
+        }
+    }
+
+    tasks.withType(Javadoc) {//兼容中文字符
+        options{
+            encoding "UTF-8"
+            charSet "UTF-8"
+            links "http://docs.oracle.com/javase/7/docs/api"
         }
     }
 }

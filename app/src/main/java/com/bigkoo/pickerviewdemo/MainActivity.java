@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -18,6 +17,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
 import com.bigkoo.pickerview.builder.TimePickerBuilder;
@@ -254,9 +255,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
          */
         Calendar selectedDate = Calendar.getInstance();//系统当前时间
         Calendar startDate = Calendar.getInstance();
-        startDate.set(2014, 1, 23);
+//        startDate.set(2014, 1, 23);
+        startDate.set(959, 0, 1);
         Calendar endDate = Calendar.getInstance();
-        endDate.set(2027, 2, 28);
+//        endDate.set(2027, 2, 28);
+        endDate.set(2200, 11, 31);
         //时间选择器 ，自定义布局
         pvCustomTime = new TimePickerBuilder(this, new OnTimeSelectListener() {
             @Override
@@ -303,10 +306,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 })
                 .setContentTextSize(18)
-                .setType(new boolean[]{false, false, false, true, true, true})
+                .setType(new boolean[]{true, true, true, true, true, false})
                 .setLabel("年", "月", "日", "时", "分", "秒")
                 .setLineSpacingMultiplier(1.2f)
-                .setTextXOffset(0, 0, 0, 40, 0, -40)
+                .setTextXOffset(0, 0, 0, 0, 0, 0)
                 .isCenterLabel(false) //是否只显示中间选中项的label文字，false则每项item全部都带有label。
                 .setDividerColor(0xFF24AD9D)
                 .build();

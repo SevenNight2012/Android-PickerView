@@ -1,15 +1,17 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'com.github.dcendents.android-maven'
 //apply plugin: 'com.novoda.bintray-release'//添加JCenter插件
 
-
+boolean useRemote = use_remote_deps
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 14
-        targetSdkVersion 26
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        //沿用开源项目的版本号，从4.1.9开始
         versionCode 34
         versionName "4.1.9"
     }
@@ -44,7 +46,13 @@ android {
 
 dependencies {
 //    compile fileTree(include: ['*.jar'], dir: 'libs')
-    api project(path: ':wheelview')
+    if (useRemote) {
+        implementation "com.xxc.dev:wheelview:4.1.0"
+    } else {
+        api project(path: ':wheelview')
+    }
 //    api 'com.contrarywind:wheelview:4.1.0'
-    implementation 'com.android.support:support-annotations:28.0.0'
+//    implementation 'com.android.support:support-annotations:28.0.0'
+    implementation "androidx.annotation:annotation:1.1.0"
 }
+apply from: "../coding-deploy.gradle"
