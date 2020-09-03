@@ -145,6 +145,18 @@ public class TimePickerView extends BasePickerView implements View.OnClickListen
         wheelTime.isCenterLabel(mPickerOptions.isCenterLabel);
     }
 
+    /**
+     * 更新时间范围的方法，内部会刷新界面
+     *
+     * @param newStart 新的起始时间
+     * @param newEnd   新的结束时间
+     */
+    public void updateRange(Calendar newStart, Calendar newEnd) {
+        mPickerOptions.startDate = newStart;
+        mPickerOptions.endDate = newEnd;
+        setRangDate();
+        setDate(newStart);
+    }
 
     /**
      * 设置默认时间

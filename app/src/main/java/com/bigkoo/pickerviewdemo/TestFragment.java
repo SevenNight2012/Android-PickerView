@@ -42,6 +42,7 @@ public class TestFragment extends Fragment implements View.OnClickListener {
         super.onActivityCreated(savedInstanceState);
         btnShow = (Button) mView.findViewById(R.id.btn_show);
         btnShow.setOnClickListener(this);
+        mView.findViewById(R.id.btn_update_range).setOnClickListener(this);
         mFrameLayout = (FrameLayout) mView.findViewById(R.id.fragmen_fragment);
         initTimePicker();
     }
@@ -103,7 +104,15 @@ public class TestFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        pvTime.show(v, false);//弹出时间选择器，传递参数过去，回调的时候则可以绑定此view
+        if (v.getId() == R.id.btn_update_range) {
+            Calendar start = Calendar.getInstance();
+            start.set(960, 0, 31);
+            Calendar end = Calendar.getInstance();
+            end.set(2200, 11, 31);
+            pvTime.updateRange(start, end);
+        } else if (v.getId() == R.id.btn_show) {
+            pvTime.show(v, false);//弹出时间选择器，传递参数过去，回调的时候则可以绑定此view
+        }
     }
 
     private String getTime(Date date) {//可根据需要自行截取数据显示

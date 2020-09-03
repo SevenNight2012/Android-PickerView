@@ -12,8 +12,8 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         //沿用开源项目的版本号，从4.1.9开始
-        versionCode 34
-        versionName "4.1.9"
+        versionCode 35
+        versionName "4.1.9.2"
     }
     buildTypes {
         release {
@@ -47,7 +47,7 @@ android {
 dependencies {
 //    compile fileTree(include: ['*.jar'], dir: 'libs')
     if (useRemote) {
-        implementation "com.xxc.dev:wheelview:4.1.0"
+        implementation "com.xxc.dev:wheelview:4.1.0.1"
     } else {
         api project(path: ':wheelview')
     }

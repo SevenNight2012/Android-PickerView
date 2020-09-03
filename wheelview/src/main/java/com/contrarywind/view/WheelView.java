@@ -319,8 +319,9 @@ public class WheelView extends View {
 
     public final void setAdapter(WheelAdapter adapter) {
         this.adapter = adapter;
-        reMeasure();
-        invalidate();
+//        reMeasure();
+//        invalidate();
+        requestLayout();
     }
 
     public void setItemsVisibleCount(int visibleCount) {

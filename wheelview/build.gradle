@@ -11,7 +11,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         //沿用开源项目的版本号，从4.1.0开始
         versionCode 31
-        versionName "4.1.0"
+        versionName "4.1.0.1"
     }
     buildTypes {
         release {

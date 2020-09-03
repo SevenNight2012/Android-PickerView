@@ -1,6 +1,7 @@
 package com.bigkoo.pickerviewdemo;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -20,6 +21,8 @@ import java.util.List;
  */
 public class TestCircleWheelViewActivity extends AppCompatActivity {
 
+    private List<String> mOptionsItems;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +34,7 @@ public class TestCircleWheelViewActivity extends AppCompatActivity {
         // wheelView.setDividerWidth(6);
         wheelView.setDividerType(WheelView.DividerType.CIRCLE);
 
-        final List<String> mOptionsItems = new ArrayList<>();
+        mOptionsItems = new ArrayList<>();
         mOptionsItems.add("10");
         mOptionsItems.add("20");
         mOptionsItems.add("30");
@@ -39,13 +42,22 @@ public class TestCircleWheelViewActivity extends AppCompatActivity {
         mOptionsItems.add("50");
         mOptionsItems.add("60");
         mOptionsItems.add("70");
-
-        wheelView.setAdapter(new ArrayWheelAdapter(mOptionsItems));
+        setupAdapter(wheelView);
         wheelView.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(int index) {
-                Toast.makeText(TestCircleWheelViewActivity.this, "" + mOptionsItems.get(index), Toast.LENGTH_SHORT).show();
+                Toast.makeText(TestCircleWheelViewActivity.this, "" + mOptionsItems.get(index), Toast.LENGTH_SHORT)
+                     .show();
             }
         });
+    }
+
+    private void setupAdapter(final WheelView wheelView) {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                wheelView.setAdapter(new ArrayWheelAdapter(mOptionsItems));
+            }
+        }, 1000);
     }
 }
